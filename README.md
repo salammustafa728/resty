@@ -4,9 +4,9 @@ Is an convert for the resty class component website, we used functional componen
 
 resource : [resty-Api](https://resty.netlify.app/)
 
-[PR link]()
+[PR link](https://github.com/salammustafa728/resty/pull/1)
 
-[deploy link]()
+[deploy link](https://resty-api-salam.netlify.app/)
 
 
 
