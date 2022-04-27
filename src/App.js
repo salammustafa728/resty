@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Formm from './Component/Formm';
 import Results from './Component/Results';
 
-export class App extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      reqData: {},
-    };
+const App = () => {
+  const [data, setData] = useState(null);
+  const [reqData, setRequest] = useState({});
+
+  const handleApiCall = (reqData) =>{
+    setRequest(reqData);
+      // mock output
+       const result = {
+        resData: [
+          { name: 'test data 1', url: ' http://www.url.com' },
+        ],
+      };
+      setData(result)
   }
 
-  apiData = (reqData) => {
-    // mock output
-    const data = {
-      resData: [
-        { name: 'test data 1', url: ' http://www.url.com' },
-      ],
-    };
-    
-    this.setState({ data, reqData });
-  }
-  render() {
-    return (
-      <div>
-         <Header />
-        <div>Request Method: {this.state.reqData.method}</div>
-        <div>URL :  {this.state.reqData.url}</div>
+  return (
+    <div>
+        <Header />
+        
+        <div>Request Method: {reqData.method}</div>
+        <div>URL :  {reqData.url}</div>
         <br/>
-        <Formm handleApiCall={this.apiData} />
+        <Formm handleApiCall={handleApiCall} />
         <br/>
         <br/>
-        <Results data={this.state.data} />
+        <Results data={data} />
         <Footer />
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App
