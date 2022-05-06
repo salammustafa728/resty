@@ -21,6 +21,7 @@ const App = () => {
     let methodType = reqData.method.toLowerCase();
     const response = await axios[methodType](reqData.url, (reqData.body) ? (reqData.body) : null);
     const result = {
+      headers: response.headers,
       resultsData: response.data,
     };
     setData(result);
