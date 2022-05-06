@@ -1,10 +1,11 @@
 import React from 'react'
 import "./Result.scss"
-
+import JSONPretty from 'react-json-pretty';
+import JSONPrettyMon from 'react-json-pretty/dist/monikai';
 const Results = (props) => {
   return (
     <div className='result' data-testid="results" >
-       {props.isLoading ? 'Loading…' :   <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>}
+       {props.isLoading ? 'Loading…' :   <JSONPretty data={props.data} theme={JSONPrettyMon}></JSONPretty> }
     </div>
   )
 }
