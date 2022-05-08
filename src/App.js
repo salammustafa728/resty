@@ -19,7 +19,10 @@ const App = () => {
     setRequest(reqData);
 
     let methodType = reqData.method.toLowerCase();
-    const response = await axios[methodType](reqData.url, (reqData.body) ? (reqData.body) : null);
+    const response = await axios[methodType](
+      reqData.url,
+      reqData.body ? reqData.body : null
+    );
     const result = {
       headers: response.headers,
       resultsData: response.data,
@@ -27,7 +30,7 @@ const App = () => {
     setData(result);
   };
   const handleClick = () => setLoading(true);
-  
+
   useEffect(() => {
     if (isLoading) {
       simulateNetworkRequest().then(() => {
@@ -38,15 +41,22 @@ const App = () => {
   return (
     <div>
       <Header />
+      <br />
+      <Formm
+        handleApiCall={handleApiCall}
+        isLoading={isLoading}
+        handleClick={handleClick}
+      />
+      <br />
+      <br />
 
-      {/* <div>Request Method: {reqData.method}</div>
-      <div>URL : {reqData.url}</div> */}
-      <br />
-      <Formm handleApiCall={handleApiCall} isLoading={isLoading} handleClick={handleClick} />
-      <br />
-      <br />
-      
-      <Results data={data} isLoading={isLoading} handleClick={handleClick} />
+      <Results
+        data={data}
+        url={reqData.url}
+        method={reqData.method}
+        isLoading={isLoading}
+        handleClick={handleClick}
+      />
       <Footer />
     </div>
   );
