@@ -1,12 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import Formm from "./Component/Form";
 import Results from "./Component/Results";
+import History from "./Component/History/index";
+import Help from "./Component/Help";
 import axios from "axios";
 import "./App.scss";
 
+const initialState = {
+  request: [],
+};
+
+// export const action ={
+//   ADD_TO_HISTORY: 'ADD_TO_HISTORY',
+//   REMOVE_FROM_HISTORY: 'REMOVE_FROM_HISTORY'
+// }
+
+const reducer = (state = initialState, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "newHistory":
+      const request = [...state.request, payload];
+      return { request };
+    default:
+      return state;
+  }
+};
+
+const newDataSearch = (reqData, data) => {
+  return {
+    type: "newHistory",
+    payload: {
+      url: reqData.url,
+      method: reqData.method,
+      resultData: data,
+    },
+  };
+};
+
 const App = () => {
+  // useReducer
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [data, setData] = useState(null);
   const [reqData, setRequest] = useState({});
   const [isLoading, setLoading] = useState(false);
@@ -28,6 +65,7 @@ const App = () => {
       resultsData: response.data,
     };
     setData(result);
+    dispatch(newDataSearch(reqData, result));
   };
   const handleClick = () => setLoading(true);
 
@@ -40,7 +78,10 @@ const App = () => {
   }, [isLoading]);
   return (
     <div>
+      <Router>
       <Header />
+      <Switch>
+        <Route exact path="/">
       <br />
       <Formm
         handleApiCall={handleApiCall}
@@ -49,7 +90,13 @@ const App = () => {
       />
       <br />
       <br />
-
+      <History
+        data={data}
+        handleApiCall={handleApiCall}
+        history={state.request}
+        isLoading={isLoading}
+        handleClick={handleClick}
+      />
       <Results
         data={data}
         url={reqData.url}
@@ -58,6 +105,12 @@ const App = () => {
         handleClick={handleClick}
       />
       <Footer />
+      </Route>
+        <Route path="/help">
+          <Help/>
+        </Route>
+      </Switch>
+      </Router>
     </div>
   );
 };
