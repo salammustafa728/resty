@@ -1,0 +1,30 @@
+
+
+.ulData {
+    display:flex;
+    flex-wrap: wrap;
+    margin:40px 40px;
+    
+  
+}
+
+.ulData li{
+    background-color: #CE9461;
+    padding: 50px;
+    border-radius: 2%;
+    box-shadow: 10px 10px 5px rgb(161, 159, 159);
+    margin-bottom: 20px;
+}
+
+.h2Title{
+    color: coral;
+}
+
+.buttonResult {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}

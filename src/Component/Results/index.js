@@ -10,7 +10,7 @@ const Results = (props) => {
         <br />
         <span>url: {props.url}</span>
       </div>
-      {props.isLoading ? (
+      {(props.isLoading && props.data )? (
         "Loading…"
       ) : (
         <JSONPretty data={props.data} theme={JSONPrettyMon}></JSONPretty>
