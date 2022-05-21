@@ -16,12 +16,6 @@ const History = (props) => {
                   <br />
                   <b>URL: </b> {data.url}
                   <br />
-                  <b
-                    className="buttonResult"
-                    onClick={!props.isLoading ? props.handleClick : null}
-                  >
-                    Display Results:
-                  </b>
                 </li>
               </div>
             );

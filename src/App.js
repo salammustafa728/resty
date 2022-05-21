@@ -8,36 +8,10 @@ import History from "./Component/History/index";
 import Help from "./Component/Help";
 import axios from "axios";
 import "./App.scss";
+import reducer,{newDataSearch} from "./Readucer";
 
 const initialState = {
   request: [],
-};
-
-// export const action ={
-//   ADD_TO_HISTORY: 'ADD_TO_HISTORY',
-//   REMOVE_FROM_HISTORY: 'REMOVE_FROM_HISTORY'
-// }
-
-const reducer = (state = initialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case "newHistory":
-      const request = [...state.request, payload];
-      return { request };
-    default:
-      return state;
-  }
-};
-
-const newDataSearch = (reqData, data) => {
-  return {
-    type: "newHistory",
-    payload: {
-      url: reqData.url,
-      method: reqData.method,
-      resultData: data,
-    },
-  };
 };
 
 const App = () => {
